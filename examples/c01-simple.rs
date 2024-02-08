@@ -1,6 +1,7 @@
 use futures::StreamExt;
 use tokio::io::AsyncWriteExt;
 use xp_ollama::consts::MODEL;
+use xp_ollama::gen::generation_stream_print;
 
 use ollama_rs::{
     generation::completion::{request::GenerationRequest, GenerationFinalResponseData, GenerationResponse},
@@ -18,8 +19,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let generation_request = GenerationRequest::new(model, prompt);
 
     // Single Response Generation
-    let response = ollama.generate(generation_request).await?;
-    println!("response: {}", response.response);
+    generation_stream_print(&ollama, generation_request).await?;
+    // let response = ollama.generate(generation_request).await?;
+    // println!("response: {}", response.response);
 
     Ok(())
 }

@@ -1,5 +1,5 @@
 pub mod consts {
-    pub const MODEL: &str = "mixtral";
+    pub const MODEL: &str = "tinyllama";
 }
 
 pub mod gen {
@@ -29,11 +29,11 @@ pub mod gen {
             let stream_responses: Vec<GenerationResponse> = response.unwrap();
 
             for stream_response in stream_responses {
-                stdout.write(stream_response.response.as_bytes());
+                stdout.write(stream_response.response.as_bytes()).await?;
                 stdout.flush().await?;
 
                 if let Some(final_data) = stream_response.final_data {
-                    stdout.write(b"\n");
+                    stdout.write(b"\n").await?;
                     stdout.flush().await?;
 
                     final_data_responses.push(final_data)
