@@ -47,10 +47,5 @@ async fn main() -> Result<(), Box<dyn Error>> {
         save_json(ctx_file_path, &last_contexts)?;
     }
 
-    // Single Response Generation
-    // generation_stream_print(&ollama, generation_request).await?;
-    // let response = ollama.generate(generation_request).await?;
-    // println!("response: {}", response.response);
-
     Ok(())
 }
