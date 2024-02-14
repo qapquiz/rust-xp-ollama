@@ -21,7 +21,6 @@ pub mod gen {
         let mut stream = ollama.generate_stream(generation_request).await?;
 
         let mut stdout = tokio::io::stdout();
-        let mut char_count = 0;
 
         let mut final_data_responses = Vec::new();
 
