@@ -29,11 +29,11 @@ pub mod gen {
             let stream_responses: Vec<GenerationResponse> = response.unwrap();
 
             for stream_response in stream_responses {
-                stdout.write(stream_response.response.as_bytes()).await?;
+                stdout.write_all(stream_response.response.as_bytes()).await?;
                 stdout.flush().await?;
 
                 if let Some(final_data) = stream_response.final_data {
-                    stdout.write(b"\n").await?;
+                    stdout.write_all(b"\n").await?;
                     stdout.flush().await?;
 
                     final_data_responses.push(final_data)
